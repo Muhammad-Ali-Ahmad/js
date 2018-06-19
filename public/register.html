@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+	<link type="text/css" rel="stylesheet" href="css/site.css" />
+    <!-- Optional JavaScript -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+	<script src="js/initialise.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/validation.js"></script>
+	
+
+    <title>Register</title>
+  </head>
+  <body>
+  	<div class="container">
+  		<div class="menu-icon">
+			<span class="menu-icon-line"></span>
+			<span class="menu-icon-line"></span>
+			<span class="menu-icon-line"></span>
+		</div>
+		<nav class="nav nav-pills flex-column flex-sm-row">
+		  <a class="flex-sm-fill text-sm-center nav-link" href="index.html">Home</a>
+		  <a class="flex-sm-fill text-sm-center nav-link" href="checkin.html">Check in</a>
+		  <a class="flex-sm-fill text-sm-center nav-link" href="summary.html">Summary</a>
+		</nav>
+
+
+
+		<div class="main-content">
+		    <h1>Register</h1>
+
+			<div id="operationStatus">
+			</div>
+
+			<div id="registrationForm">
+				<div class="form-group">
+					<label for="fname">First name<span class="asterisk">*</span></label>
+					<input type="text" id="fname" class="form-control" required>
+					<div class="invalid-feedback">Please enter your First name</div>
+				</div>
+				<div class="form-group">
+					<label for="lname">Last name<span class="asterisk">*</span></label>
+					<input type="text" id="lname" class="form-control" required>
+					<div class="invalid-feedback">Please enter your Last name</div>					
+				</div>
+				<div class="form-group">
+					<label for="region">Region<span class="asterisk">*</span></label>
+					<select class="form-control" id="region" required>
+					    <option value="default">Please select from the list</option>
+					    <option value="be">Baitul Ehsan</option>
+					    <option value="bf">Baitul Futuh</option>
+					    <option value="bn">Baitun Noor</option>
+					    <option value="bs">Baitus Subhan</option>
+					    <option value="bas">Bashir</option>
+					    <option value="eas">East</option>
+					    <option value="her">Hertfordshire</option>
+					    <option value="isl">Islamabad</option>
+					    <option value="mid">Middlesex</option>
+					    <option value="em">East Midlands</option>
+					    <option value="wm">West Midlands</option>
+					    <option value="mas">Masroor</option>
+					    <option value="muq">Muqami</option>
+					    <option value="ne">North East</option>
+					    <option value="nw">North West</option>
+					    <option value="sco">Scotland</option>
+					    <option value="sou">South</option>
+					    <option value="sw">South West</option>
+					    <option value="tah">Tahir</option>
+					    <option value="yor">Yorkshire</option>
+					</select>
+					<div class="invalid-feedback">Please select your region from the list</div>
+				</div>
+				<div class="form-group">
+					<label for="qiadat">Qiadat<span class="asterisk">*</span></label>
+					<input type="text" id="qiadat" class="form-control" required>
+					<div class="invalid-feedback">Please enter your Qiadat</div>
+				</div>
+				<div class="form-group">
+					<label for="tel">Mobile number<span class="asterisk">*</span></label>
+					<input type="tel" id="tel" class="form-control" required>
+					<div class="invalid-feedback">Please enter your Mobile number</div>
+				</div>
+				<div class="form-group">
+					<label for="email">Email address<span class="asterisk">*</span></label>
+					<input type="email" id="email" class="form-control" required>
+					<div class="invalid-feedback">Please enter your Email address</div>
+				</div>
+				<div class="form-group">
+					<label for="age">Age</label>
+					<input type="number" id="age" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="dietary">Dietary requirements/Allergies</label>
+					<input type="text" id="dietary" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="stay">Number of days you intend to stay</label>
+					<input type="number" id="stay" class="form-control">
+				</div>
+
+				<button id="addVolunteer" class="btn btn-primary">Submit</button>
+			</div>
+
+			<button id="registerAgain" class="btn btn-primary" hidden="true">Register again</button>
+
+			<button id="logout" class="btn btn-secondary btn-sm" hidden="true">Log out</button>
+		</div>
+	</div>
+  	<script src="js/auth.js"></script>
+  </body>
+</html>
