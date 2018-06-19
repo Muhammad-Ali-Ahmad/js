@@ -27,6 +27,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 	<script src="js/initialise.js"></script>
+	<script src="js/checkin.js"></script>
 	<script src="js/script.js"></script>
 	
 
@@ -81,18 +82,42 @@
 				
 				<div id="operationStatus"></div>
 
-				<input type="text" id="searchfield" class="form-control">
+				<div class="form-group" id="regionList">
+					<select class="form-control">
+					    <option value="default">Please select from the list</option>
+					    <option value="be">Baitul Ehsan</option>
+					    <option value="bf">Baitul Futuh</option>
+					    <option value="bn">Baitun Noor</option>
+					    <option value="bs">Baitus Subhan</option>
+					    <option value="bas">Bashir</option>
+					    <option value="eas">East</option>
+					    <option value="her">Hertfordshire</option>
+					    <option value="isl">Islamabad</option>
+					    <option value="mid">Middlesex</option>
+					    <option value="em">East Midlands</option>
+					    <option value="wm">West Midlands</option>
+					    <option value="mas">Masroor</option>
+					    <option value="muq">Muqami</option>
+					    <option value="ne">North East</option>
+					    <option value="nw">North West</option>
+					    <option value="sco">Scotland</option>
+					    <option value="sou">South</option>
+					    <option value="sw">South West</option>
+					    <option value="tah">Tahir</option>
+					    <option value="yor">Yorkshire</option>
+					</select>
+				</div>
+
+				<input type="text" id="searchfield" class="form-control inputAndSearch">
 			</div>
 
-			<button id="search" class="btn btn-primary">Search</button>
+			<button id="search" class="btn btn-primary inputAndSearch">Search</button>
 
 
 		    <table class="table" id="searchResult" hidden="true">
 			    <thead>
-			    	<th scope="col">First Name</th>
-			    	<th scope="col">Last Name</th>
-			    	<th scope="col">Region</th>
-			    	<th scope="col">Qiadat</th>
+			    	<th scope="col">Name</th>
+			    	<th scope="col"><span class="checkinvalue">Qiadat</span> <span class="checkinvalue">Region</span></th>
 			    	<th scope="col"></th>
 			    </thead>
 			    <tbody class="tbodyData">

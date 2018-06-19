@@ -126,3 +126,14 @@ td.table-success {
 h1.jwa {
     margin-top: 1.5em;
 }
+
+.checkinvalue {
+    display: block;
+}
+.table thead th {
+    vertical-align: top;
+}
+
+#regionList {
+    display: none;
+}
