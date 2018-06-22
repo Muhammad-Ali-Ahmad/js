@@ -32,11 +32,11 @@ h1 {
 	margin: 1em 0.5em;
 }
 
-#search{
+#search, #searchSummary, #addDate{
 	margin-bottom: 1em;
 }
 
-#searchfield {
+#searchfield, #addDate, #searchSummary{
     margin-top: 1em;
 }
 
@@ -134,6 +134,6 @@ h1.jwa {
     vertical-align: top;
 }
 
-#regionList {
+.regionList {
     display: none;
 }

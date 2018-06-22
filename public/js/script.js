@@ -8,3 +8,10 @@ $(document).ready(function(){
 		$('.nav').toggle();
 	});
 });
+
+function show(e) {
+	$(e).css('display', 'block');
+}
+function hide(e) {
+	$(e).css('display', 'none');
+}
