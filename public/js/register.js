@@ -56,8 +56,8 @@ $(document).ready(function(){
 	                $('#dietary').val("");
 	                $('#stay').val("");
 					$('#operationStatus')[0].scrollIntoView();
-					$('#registrationForm').attr('hidden', true);
-					$('#registerAgain').attr('hidden', false);
+					$('#registrationForm').css("display", "none");
+					$('#registerAgain').css("display", "block");
 	                // loadData();
 	           }).catch(function(error) {
 	            $('#operationStatus').html('<div class="alert alert-danger"><strong>Error!</strong> Unable to save ' + fname + ' ' + lname + '!</div>');
@@ -70,8 +70,8 @@ $(document).ready(function(){
 
 	$('#registerAgain').click(function(){
         $('#operationStatus').html('');
-		$('#registrationForm').attr('hidden', false);
-		$('#registerAgain').attr('hidden', true);
+		$('#registrationForm').css("display", "block");
+		$('#registerAgain').css("display", "none");
 	});
 });
 //*************************************** /REGISTER ***********************************************

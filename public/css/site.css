@@ -134,6 +134,6 @@ h1.jwa {
     vertical-align: top;
 }
 
-.regionList {
+.regionList, #searchResult, #summaryResult, #logout, #loginContainer, #welcome, #registerAgain{
     display: none;
 }

@@ -75,12 +75,6 @@
 				    Date (e.g. 23-6-2018)
 				  </label>
 				</div>
-				<div class="form-check form-check-inline" hidden>
-				  <input class="form-check-input" type="radio" name="summaryBy" id="noOfDays" value="noOfDays">
-				  <label class="form-check-label" for="noOfDays">
-				    No of days
-				  </label>
-				</div>
 				<div class="form-check form-check-inline">
 				  <input class="form-check-input" type="radio" name="summaryBy" id="totalSummary" value="totalSummary">
 				  <label class="form-check-label" for="totalSummary">
@@ -122,7 +116,7 @@
 			
 			<button id="searchSummary" class="btn btn-primary inputAndSearch">Search</button>
 
-		    <table class="table" id="summaryResult" hidden="true">
+		    <table class="table" id="summaryResult">
 			    <thead>
 			    	<th scope="col">Region</th>
 			    	<th scope="col">Total</th>
@@ -132,7 +126,7 @@
 			    </tbody>
 			</table>
 
-		    <table class="table inputAndSearch" id="searchResult" hidden="true">
+		    <table class="table inputAndSearch" id="searchResult">
 			    <thead>
 			    	<th scope="col">First Name</th>
 			    	<th scope="col">Last Name</th>
@@ -144,7 +138,7 @@
 			    </tbody>
 			</table>
 
-			<button id="logout" class="btn btn-secondary btn-sm" hidden="true">Log out</button>
+			<button id="logout" class="btn btn-secondary btn-sm">Log out</button>
 
 			<div class="modal" id="logoutModal" tabindex="-1" role="dialog">
 			  <div class="modal-dialog" role="document">

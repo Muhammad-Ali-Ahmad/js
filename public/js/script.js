@@ -15,3 +15,10 @@ function show(e) {
 function hide(e) {
 	$(e).css('display', 'none');
 }
+
+function noRecordFound() {
+    $('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
+	$('#searchResult').css('display', 'none');
+	$('#searchResult .tbodyData').html('');
+}
+

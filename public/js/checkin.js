@@ -7,37 +7,12 @@ $(document).ready(function(){
         var searchByValue = $('input[name=searchBy]:checked').val();
         jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
             if(querySnapshot.empty) {
-            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-            	$('#searchResult').css('display', 'none');
-				$('#searchResult .tbodyData').html('');
+            	noRecordFound();
             } else {
-	            $('#searchResult').css('display', 'block');
-	            $('#operationStatus').html('');
-            	LoadCheckinData(querySnapshot); 
+	            LoadCheckinData(querySnapshot); 
             }
         });
     });	
-
-    // $('#search').click(function(){
-    //     var searchValue = $('#searchfield').val().toLowerCase().trim();
-    //     var searchByValue = $('input[name=searchBy]:checked').val();   
-	   //  db.collection("volunteers").where(searchByValue, "==", searchValue).onSnapshot({ includeMetadataChanges: true }, function(querySnapshot) {
-		  //     querySnapshot.docChanges().forEach(function(change) {
-		  //           if(querySnapshot.empty) {
-		  //           	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-		  //           	$('#searchResult').attr('hidden', true);
-				// 		$('#searchResult .tbodyData').html('');
-		  //           } else {
-			 //            $('#operationStatus').html('');
-		  //           	LoadCheckinData(querySnapshot); 
-		  //           }
-
-		  //           var source = querySnapshot.metadata.fromCache ? "local cache" : "server";
-		  //           console.log("Data came from " + source);
-		  //     });
-		  // });
-
-    // });
 
     $('#searchfield').keypress(function(e){
     	if (e.which == 13) {
@@ -45,12 +20,8 @@ $(document).ready(function(){
 	        var searchByValue = $('input[name=searchBy]:checked').val();
 	        jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
 		        if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-            		$('#searchResult').css('display', 'none');
-					$('#searchResult .tbodyData').html('');
+            		noRecordFound();
 	            } else {
-	            	$('#searchResult').css('display', 'block');
-	            	$('#operationStatus').html('');
 	            	LoadCheckinData(querySnapshot); 
 	            }
 	        });
@@ -70,12 +41,8 @@ $(document).ready(function(){
         	$('#regionList select').val("default");
 	        jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
 		        if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	$('#searchResult').css('display', 'none');
-					$('#searchResult .tbodyData').html('');
+            		noRecordFound();
 	            } else {
-	            	$('#searchResult').css('display', 'block');
-		            $('#operationStatus').html('');
 	            	LoadCheckinData(querySnapshot); 
 	            }
 	        });
@@ -86,18 +53,12 @@ $(document).ready(function(){
     	var region = $('option:selected').text();
     	jsRef.where('region', "==", region.toLowerCase()).onSnapshot(function(querySnapshot) {
 	        if(querySnapshot.empty) {
-            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-            	$('#searchResult').css('display', 'none');
-				$('#searchResult .tbodyData').html('');
+            	noRecordFound();
             } else {
-            	$('#searchResult').css('display', 'block');
-	            $('#operationStatus').html('');
             	LoadCheckinData(querySnapshot); 
             }
         });
     });
-
-
 
 
 	//checkin
@@ -109,8 +70,6 @@ $(document).ready(function(){
 		var day = date.getDate();
 		var month = date.getMonth() + 1;
 		var year = date.getFullYear();
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
 
 		db.collection("volunteers").doc(docuName).set({
 			[day+"-"+month+"-"+year]:true
@@ -127,19 +86,19 @@ $(document).ready(function(){
 	});
 
 	function LoadCheckinData(querySnapshot) {
+		$('#searchResult').css('display', 'block');
+		$('#operationStatus').html('');
 		var tableRow='';
 		querySnapshot.forEach(function(doc) {
 			var id = doc.id;
 			var document = doc.data();
 			tableRow += '<tr>';
 			tableRow += '<td> <span class="fname checkinvalue">' + toTitleCase(document.fname) + '</span><span class="lname checkinvalue">' + toTitleCase(document.lname) + '</span></td>';
-			// tableRow += '<td class="lname">' + toTitleCase(document.lname) + '</td>';
 			tableRow += '<td> <span class="qiadat checkinvalue">' + toTitleCase(document.qiadat) + '</span><span class="region checkinvalue">' + toTitleCase(document.region) + '</span></td>';
-			// tableRow += '<td class="qiadat">' + toTitleCase(document.qiadat) + '</td>';
             tableRow += '<td class="checkin"><button class="btn btn-success" id="'+id+'"">Check in ></button></td>'
 			tableRow += '</tr>';
 		});
-        $('#searchResult').attr('hidden', false);
+        $('#searchResult').css("display", "block");
 		$('#searchResult .tbodyData').html(tableRow);
 	}
 

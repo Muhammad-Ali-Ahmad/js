@@ -3,92 +3,12 @@ $(document).ready(function(){
 	//*************************************** SUMMARY ***********************************************
 
 	$('#searchSummary').click(function(){
-        var searchValue = $('#summaryfield').val().toLowerCase().trim();
-        var searchByValue = $('input[name=summaryBy]:checked').val();
-        if(searchByValue == "date") {
-	        jsRef.where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
-		        if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	hide('#searchResult');
-					$('#searchResult .tbodyData').html('');
-	            } else {
-		            $('#operationStatus').html('');
-	            	show('#searchResult');
-	            	LoadTableData(querySnapshot, true); 
-		        };
-		    });
-    	} else if (searchByValue == "region") {
-	    	var region = $('option:selected').text();
-	    	jsRef.where('region', "==", region.toLowerCase()).where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
-		        if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	hide('#searchResult');
-					$('#searchResult .tbodyData').html('');
-	            } else {
-	            	show('#searchResult');
-		            $('#operationStatus').html('');
-	            	LoadTableData(querySnapshot); 
-	            }
-	        });
-    	} else if (searchByValue == "noOfDays") {
-    		calculateDays(searchValue);
-    	} else {
-    		jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
-	        	if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	hide('#searchResult');
-					$('#searchResult .tbodyData').html('');
-	            } else {
-		            $('#operationStatus').html('');
-	            	show('#searchResult');
-	            	LoadTableData(querySnapshot, true); 
-	            }
-            });
-    	}
+		getSummary()
     });
     
     $('#summaryfield').keypress(function(e){
     	if (e.which == 13) {
-	        var searchValue = $('#summaryfield').val().toLowerCase().trim();
-	        var searchByValue = $('input[name=summaryBy]:checked').val();
-	        if(searchByValue == "date") {
-		        jsRef.where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
-			        if(querySnapshot.empty) {
-		            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-		            	hide('#searchResult');
-						$('#searchResult .tbodyData').html('');
-		            } else {
-			            $('#operationStatus').html('');
-	            		show('#searchResult');
-		            	LoadTableData(querySnapshot, true); 
-			        };
-			    });
-	    	} else if (searchByValue == "region") {
-		    	var region = $('option:selected').text();
-		    	jsRef.where('region', "==", region.toLowerCase()).where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
-			        if(querySnapshot.empty) {
-		            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-		            	hide('#searchResult');
-						$('#searchResult .tbodyData').html('');
-		            } else {
-		            	show('#searchResult');
-			            $('#operationStatus').html('');
-		            	LoadTableData(querySnapshot); 
-		            }
-		        });
-	    	} else {
-	    		jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
-		        	if(querySnapshot.empty) {
-		            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-		            	hide('#searchResult');
-						$('#searchResult .tbodyData').html('');
-		            } else {
-			            $('#operationStatus').html('');
-	            		show('#searchResult');
-		            	LoadTableData(querySnapshot, true); 
-		            }
-	            });
-	    	}
+			getSummary()
     	}
     });
 
@@ -104,13 +24,9 @@ $(document).ready(function(){
     		$('#regionList select').val("default");
 	        jsRef.where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
 		        if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	hide('#searchResult');
-					$('#searchResult .tbodyData').html('');
+					noRecordFound();
 	            } else {
-	            	show('#searchResult');
-		            $('#operationStatus').html('');
-	            	LoadTableData(querySnapshot, true); 
+	            	LoadTableData(querySnapshot); 
 		        };
 		    });
     	} else if (searchByValue == "region") {
@@ -135,13 +51,9 @@ $(document).ready(function(){
     		$('#regionList select').val("default");
     		jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
 	        	if(querySnapshot.empty) {
-	            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-	            	hide('#searchResult');
-					$('#searchResult .tbodyData').html('');
+            		noRecordFound();
 	            } else {
-	            	show('#searchResult');
-		            $('#operationStatus').html('');
-	            	LoadTableData(querySnapshot, true); 
+	            	LoadTableData(querySnapshot); 
 	            }
             });
     	}
@@ -160,20 +72,17 @@ $(document).ready(function(){
     	var region = $('option:selected').text();
     	jsRef.where('region', "==", region.toLowerCase()).onSnapshot(function(querySnapshot) {
 	        if(querySnapshot.empty) {
-            	$('#operationStatus').html('<div class="alert alert-danger">No record found.</div>');
-            	hide('#searchResult');
-				$('#searchResult .tbodyData').html('');
+            	noRecordFound();
             } else {
-            	show('#searchResult');
-	            $('#operationStatus').html('');
             	LoadTableData(querySnapshot); 
             }
         });
     });
 
 
-
 	function LoadTableData(querySnapshot) {
+        $('#operationStatus').html('');
+    	show('#searchResult');
 		var tableRow='';
 		var total = 0;
 		querySnapshot.forEach(function(doc) {
@@ -192,7 +101,7 @@ $(document).ready(function(){
 		tableRow += '<td colspan="2">' + total + '</td>';
 		tableRow += '</tr>';
 
-        $('#searchResult').attr('hidden', false);
+        $('#searchResult').css('display', 'block');
 		$('#searchResult .tbodyData').html(tableRow);
 	}
 
@@ -225,18 +134,41 @@ $(document).ready(function(){
 	    tableRow += '<tr class="bold"><td>Total</td><td>' + total + '</td></tr>'
 
 
-        $('#summaryResult').attr('hidden', false);
+        $('#summaryResult').css('display', 'block');
 		$('#summaryResult .tbodyData').html(tableRow);
 	}
 
 
-	function calculateDays(days) {
-		show('#summaryResult');
-        jsRef.orderBy('region').startAt('a').endAt('z').onSnapshot(function(querySnapshot) {
-            LoadSummaryData(querySnapshot);
-        });
+	function getSummary() {
+		var searchValue = $('#summaryfield').val().toLowerCase().trim();
+        var searchByValue = $('input[name=summaryBy]:checked').val();
+        if(searchByValue == "date") {
+	        jsRef.where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
+		        if(querySnapshot.empty) {
+        			noRecordFound();
+	            } else {
+	            	LoadTableData(querySnapshot); 
+		        };
+		    });
+    	} else if (searchByValue == "region") {
+	    	var region = $('option:selected').text();
+	    	jsRef.where('region', "==", region.toLowerCase()).where(searchValue, "==", true).onSnapshot(function(querySnapshot) {
+		        if(querySnapshot.empty) {
+        			noRecordFound();
+	            } else {
+	            	LoadTableData(querySnapshot); 
+	            }
+	        });
+    	} else {
+    		jsRef.where(searchByValue, "==", searchValue).onSnapshot(function(querySnapshot) {
+	        	if(querySnapshot.empty) {
+        			noRecordFound();
+	            } else {
+	            	LoadTableData(querySnapshot); 
+	            }
+            });
+    	}
 	}
-
 	//*************************************** /SUMMARY ***********************************************
 
 });
